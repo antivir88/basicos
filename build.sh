@@ -7,13 +7,13 @@ rm -rf .build
 mkdir .build
 
 # compile ASM files
-nasm -f elf32 boot.asm -o .build/boot.o
-nasm -f elf32 gdt.asm -o .build/gdt.o
-nasm -f elf32 proc.asm -o .build/proc.o
-nasm -f elf32 irqs.asm -o .build/irqs.o
+nasm -f elf32 src/asm/boot.asm -o .build/boot.o
+nasm -f elf32 src/asm/gdt.asm -o .build/gdt.o
+nasm -f elf32 src/asm/proc.asm -o .build/proc.o
+nasm -f elf32 src/asm/irqs.asm -o .build/irqs.o
 
 # compile C files
-gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -c kmain.c -o .build/kmain.o
+gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -c src/kmain.c -o .build/kmain.o
 
 # linking
 ld -m elf_i386 -T kernel.ld -o .build/os.elf .build/boot.o .build/gdt.o .build/proc.o .build/irqs.o .build/kmain.o
@@ -34,4 +34,3 @@ grub2-mkrescue -o .build/basic-os.iso .build/iso
 
 # running via grub
 qemu-system-x86_64 -cdrom .build/basic-os.iso
-

@@ -48,7 +48,7 @@ void clear_screen()
     }
 }
 
-void kmain(void)
+int kmain(void)
 {
     clear_screen();
     write_text("Happy+birthday+!", 0x0F00);
@@ -67,5 +67,6 @@ void kmain(void)
     write_text("Hap", 0x0200);
     write_text("Ha", 0x0100);
     write_text("H", 0x0000);
-}
 
+    return 0xdeadbaba;
+}
