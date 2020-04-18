@@ -6,12 +6,17 @@ rm -rf .build
 # make buid dir
 mkdir .build
 
-# compile files
+# compile ASM files
 nasm -f elf32 boot.asm -o .build/boot.o
-gcc -m32 -ffreestanding -fno-stack-protector -nostdlib -c kmain.c -o .build/kmain.o
+nasm -f elf32 gdt.asm -o .build/gdt.o
+nasm -f elf32 proc.asm -o .build/proc.o
+nasm -f elf32 irqs.asm -o .build/irqs.o
+
+# compile C files
+gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -c kmain.c -o .build/kmain.o
 
 # linking
-ld -m elf_i386 -T kernel.ld -o .build/os.elf .build/boot.o .build/kmain.o
+ld -m elf_i386 -T kernel.ld -o .build/os.elf .build/boot.o .build/gdt.o .build/proc.o .build/irqs.o .build/kmain.o
 
 # objecting
 objcopy -O binary .build/os.elf .build/iso.bin
