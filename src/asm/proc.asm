@@ -29,4 +29,3 @@ copy_page_physical:
     popf
     pop ebx
     ret
-

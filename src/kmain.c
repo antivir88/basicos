@@ -1,8 +1,6 @@
-void isr_handler()
-{
+void isr_handler() {
 }
-void irq_handler()
-{
+void irq_handler() {
 }
 
 /* 0 - Black
@@ -22,8 +20,7 @@ void irq_handler()
 // 14/e - Light Brown
 // 15/f – White */
 
-int text_length(char* str)
-{
+int text_length(char* str) {
     int len = 0;
     while (str[len]) {
         len++;
@@ -31,8 +28,7 @@ int text_length(char* str)
     return len;
 }
 
-void write_text(char* text, short color)
-{
+void write_text(char* text, short color) {
     short* vga = (short*)0xb8000;
 
     for (int i = 0; i < text_length(text); ++i) {
@@ -40,16 +36,14 @@ void write_text(char* text, short color)
     }
 }
 
-void clear_screen()
-{
+void clear_screen() {
     short* vga = (short*)0xb8000;
     for (int i = 0; i < 80 * 25 * 2; i++) {
         vga[i] = 0;
     }
 }
 
-int kmain(void)
-{
+int kmain(void) {
     clear_screen();
     write_text("Happy+birthday+!", 0x0F00);
     write_text("Happy+birthday+", 0x0E00);
