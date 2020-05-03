@@ -12,10 +12,15 @@ asm:
 	nasm -f elf32 src/asm/irqs.asm -o $(BUILDDIR)/irqs.o
 
 source:
-	gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -c src/kmain.c -o $(BUILDDIR)/kmain.o
+	mkdir $(BUILDDIR)/lib
+	gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -I src/include -c src/kmain.c -o $(BUILDDIR)/kmain.o
+	gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -I src/include -c src/lib/stdlib.c -o $(BUILDDIR)/lib/stdlib.o
+	gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -I src/include -c src/lib/tty.c -o $(BUILDDIR)/lib/tty.o
+	gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -I src/include -c src/lib/stdarg.c -o $(BUILDDIR)/lib/stdarg.o
+	gcc -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib -nostdinc -fno-builtin -I src/include -c src/lib/interrupt.c -o $(BUILDDIR)/lib/interrupt.o
 
 linking:
-	ld -m elf_i386 -T kernel.ld -o $(BUILDDIR)/os.elf $(BUILDDIR)/boot.o $(BUILDDIR)/gdt.o $(BUILDDIR)/proc.o $(BUILDDIR)/irqs.o $(BUILDDIR)/kmain.o
+	ld -m elf_i386 -T kernel.ld -o $(BUILDDIR)/os.elf $(BUILDDIR)/boot.o $(BUILDDIR)/gdt.o $(BUILDDIR)/proc.o $(BUILDDIR)/irqs.o $(BUILDDIR)/lib/stdlib.o $(BUILDDIR)/lib/tty.o $(BUILDDIR)/lib/stdarg.o $(BUILDDIR)/lib/interrupt.o $(BUILDDIR)/kmain.o
 
 objecting:
 	objcopy -O binary $(BUILDDIR)/os.elf $(BUILDDIR)/iso.bin
