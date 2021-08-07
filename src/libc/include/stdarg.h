@@ -1,6 +1,10 @@
 #ifndef STDARG_H
 #define STDARG_H
 
+/**
+ * Для доступа к различному числу аргументов, переданных функциям.
+ */
+
 #define _AUPBND 1
 #define _ADNBND 1
 

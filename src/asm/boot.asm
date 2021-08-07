@@ -1,5 +1,6 @@
 bits 32
 
+
 section .multiboot_header
 header_start:
     dd 0xe85250d6                ; magic number (multiboot 2)
@@ -16,21 +17,26 @@ header_start:
     dd 8    ; size
 header_end:
 
+
 section .text
   align 4
   dd 0x1BADB002
   dd 0x00
   dd - (0x1BADB002 + 0x00)
 
+
 global start
 extern kmain
+
 
 start:
   cli
   mov esp, stack_space
   call kmain
   hlt
+  ;jmp $ ; added - loopback
+
 
 section .bss
-resb 8192
+    resb 8192
 stack_space:
