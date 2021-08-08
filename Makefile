@@ -29,8 +29,8 @@ LDOPTS = $(BUILDDIR)/os.elf \
 rebuild: clean asm source linking objecting makeiso
 rerunraw: rebuild runraw86
 reruniso: rebuild runiso86
-rerunraw64: rebuild runraw64
-reruniso64: rebuild runiso64
+rerunrawhdd: rebuild runraw86
+rerunisohdd: rebuild runiso86
 
 # ASM processing
 asm:
@@ -76,5 +76,19 @@ runraw64:
 runiso64:
 	qemu-system-x86_64 -cdrom $(BUILDDIR)/basic-os.iso
 
+runraw86hdd:
+	qemu-system-i386 -kernel $(BUILDDIR)/os.elf hdd.qcow2
+runiso86hdd:
+	qemu-system-i386 -cdrom $(BUILDDIR)/basic-os.iso hdd.qcow2
+runraw64hdd:
+	qemu-system-x86_64 -kernel $(BUILDDIR)/os.elf hdd.qcow2
+runiso64hdd:
+	qemu-system-x86_64 -cdrom $(BUILDDIR)/basic-os.iso hdd.qcow2
+
 clean:
 	rm -rf $(BUILDDIR)/*
+
+hardmake:
+	qemu-img create -f qcow2 hdd.qcow2 10G
+hardinfo:
+	qemu-img info hdd.qcow2

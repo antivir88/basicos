@@ -1,0 +1,5 @@
+.build/*
+.cproject
+*.qcow2
+.project
+.settings
