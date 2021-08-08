@@ -68,7 +68,7 @@ makeiso:
 	grub2-mkrescue -o $(BUILDDIR)/basic-os.iso $(BUILDDIR)/iso
 
 runraw86:
-	qemu-system-i386 -kernel $(BUILDDIR)/os.elf
+	qemu-system-i386 -kernel $(BUILDDIR)/os.elf -monitor stdio
 runiso86:
 	qemu-system-i386 -cdrom $(BUILDDIR)/basic-os.iso
 runraw64:

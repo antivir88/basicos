@@ -84,8 +84,9 @@ void isr_handler(registers_t *regs)
 {
     // fault exception
     if (regs->int_no < 32) {
-        framebuffer_putString(exception_types[regs->int_no]); // puts
+        framebuffer_write(exception_types[regs->int_no]); // puts
         framebuffer_putString(" Exception. System Halted!\n");
+        //asm volatile("hlt");
         for (;;); // void loop
     }
 }
