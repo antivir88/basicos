@@ -4,6 +4,7 @@
 /** Определения различных типов целых чисел.
  */
 
+// DEFINITIONS
 
 typedef unsigned long long  uint64;
 typedef          long long  sint64;
@@ -29,6 +30,10 @@ typedef   signed char         int8;
 #else
     typedef uint32 size_t;
 #endif
+
+
+// METHODS
+
 
 
 #endif

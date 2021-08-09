@@ -7,13 +7,7 @@
  * сигналов, поиска и сортировки.
  */
 
-
-#define min(a, b) (((a) > (b)) ? (b) : (a))
-#define max(a, b) (((a) > (b)) ? (a) : (b))
-
-
-
-
+// DEFINITIONS
 
 #ifdef __x86_64__
 	typedef uint64 size_t;
@@ -21,6 +15,11 @@
 	typedef uint32 size_t;
 #endif
 
+
+// METHODS
+
+#define min(a, b) (((a) > (b)) ? (b) : (a))
+#define max(a, b) (((a) > (b)) ? (a) : (b))
 
 void memcpy(void *dest, void *src, uint32 len);
 void memset(uint8 *dest, uint8 val, uint32 len);

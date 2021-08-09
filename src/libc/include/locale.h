@@ -6,5 +6,9 @@
  * соответствующего языка.
  */
 
+// DEFINITIONS
+
+// METHODS
+
 
 #endif

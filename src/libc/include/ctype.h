@@ -8,5 +8,9 @@
  * и реализации, использующие EBCDIC). 
  */
 
+// DEFINITIONS
+
+// METHODS
+
 
 #endif

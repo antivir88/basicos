@@ -9,5 +9,9 @@
  * чисел (_MIN, _MAX). 
  */
 
+// DEFINITIONS
+
+// METHODS
+
 
 #endif

@@ -6,6 +6,9 @@
  * содержит весьма важную функцию printf.
  */
 
+// DEFINITIONS
+
+// METHODS
 
 void printf(char *fmt, ...);
 

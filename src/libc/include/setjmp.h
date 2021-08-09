@@ -5,5 +5,9 @@
  * Объявляет макросы setjmp и longjmp, используемые для нелокальных переходов
  */
 
+// DEFINITIONS
+
+// METHODS
+
 
 #endif
