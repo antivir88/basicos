@@ -92,3 +92,24 @@ hardmake:
 	qemu-img create -f qcow2 hdd.qcow2 10G
 hardinfo:
 	qemu-img info hdd.qcow2
+
+# sudo -i
+# modprobe nbd                      ; activate kernel module
+# qemu-nbd -c /dev/nbd0 ./hdd.qcow2 ; enable route to driver
+# ...
+# fdisk /dev/nbd0                   ; create partion with type fat32_LBA
+# mkfs -t vfat /dev/nbd0p1          ; make fat32 fs
+# fsck.vfat /dev/nbd0p1             ; check on errors fat32 fs
+# ...
+# mount -t vfat /dev/nbd0p1 /mnt    ; mount to host system
+# ...                             ; any operation on files and directories
+# umount /dev/nbd0p1                ; dismount from host system
+# qemu-nbd -d /dev/nbd0             ; disable route from driver
+# rmmod nbd                         ; disable kernel module
+
+
+
+
+
+
+
