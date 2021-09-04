@@ -9,6 +9,9 @@ void shell(void)
     framebuffer_putString("2021 (c) Zcasper");
     framebuffer_putString("");
     framebuffer_putString("");
+    framebuffer_putString("BIOS -> BasicOS");
+    framebuffer_putString("");
+    framebuffer_putString("");
 
     for (;;) {
         framebuffer_putChar(getchar());

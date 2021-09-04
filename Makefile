@@ -47,11 +47,11 @@ source:
 	gcc $(GCCOPTS) -c $(KERNLDIR)/irq.c -o $(BUILDDIR)/irq.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/idt.c -o $(BUILDDIR)/idt.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/isr.c -o $(BUILDDIR)/isr.o
+	gcc $(GCCOPTS) -c $(KERNLDIR)/io.c -o $(BUILDDIR)/io.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/framebuffer.c -o $(BUILDDIR)/framebuffer.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/timer.c -o $(BUILDDIR)/timer.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/keyboard.c -o $(BUILDDIR)/keyboard.o
 	gcc $(GCCOPTS) -c $(SHELLDIR)/shell.c -o $(BUILDDIR)/shell.o
-	#gcc $(GCCOPTS) -c $(KERNLDIR)/io.c -o $(BUILDDIR)/io.o
 
 # mixer
 linking:
