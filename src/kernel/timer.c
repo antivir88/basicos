@@ -1,3 +1,4 @@
+// #include "framebuffer.h"
 #include "interrupts.h"
 
 
@@ -9,7 +10,7 @@ void timer_handler(registers_t *regs)
     timer_ticks++;
 
     if (timer_ticks % 18 == 0) {
-        //framebuffer_putString("One Second");
+        // framebuffer_putString("One Second");
     }
 }
 

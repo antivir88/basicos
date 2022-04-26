@@ -10,6 +10,7 @@ GCCOPTS = -m32 -ffreestanding -fno-stack-protector -Wall -Wextra -nostdlib \
 
 LDOPTS = $(BUILDDIR)/os.elf \
         $(BUILDDIR)/boot.o \
+        $(BUILDDIR)/io.o \
         $(BUILDDIR)/interrupt.o \
         $(BUILDDIR)/interrupts.o \
         $(BUILDDIR)/gdt.o \
@@ -21,6 +22,7 @@ LDOPTS = $(BUILDDIR)/os.elf \
         $(BUILDDIR)/timer.o \
         $(BUILDDIR)/keyboard.o \
         $(BUILDDIR)/shell.o \
+        $(BUILDDIR)/lib/printf.o \
         $(BUILDDIR)/kmain.o
 
 
@@ -51,6 +53,7 @@ source:
 	gcc $(GCCOPTS) -c $(KERNLDIR)/framebuffer.c -o $(BUILDDIR)/framebuffer.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/timer.c -o $(BUILDDIR)/timer.o
 	gcc $(GCCOPTS) -c $(KERNLDIR)/keyboard.c -o $(BUILDDIR)/keyboard.o
+	gcc $(GCCOPTS) -c $(GLIBCDIR)/stdio/printf.c -o $(BUILDDIR)/lib/printf.o
 	gcc $(GCCOPTS) -c $(SHELLDIR)/shell.c -o $(BUILDDIR)/shell.o
 
 # mixer

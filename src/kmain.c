@@ -1,58 +1,40 @@
 #include "interrupts.h"
 #include "shell.h"
 
-//typedef struct {
-//	uint64 base;
-//	uint64 size;
-//} BootModuleInfo;
+#include "stdio.h"
 
 
-
-uint8 getchar(void)
-{
-    uint8 ascii = 0;
-    while (ascii == 0) {
-        ascii = keyboard_buffer_dequeue();
-    }
-    return ascii;
-}
-
-enum vga_color {
-	VGA_COLOR_BLACK = 0,
-	VGA_COLOR_BLUE = 1,
-	VGA_COLOR_GREEN = 2,
-	VGA_COLOR_CYAN = 3,
-	VGA_COLOR_RED = 4,
-	VGA_COLOR_MAGENTA = 5,
-	VGA_COLOR_BROWN = 6,
-	VGA_COLOR_LIGHT_GREY = 7,
-	VGA_COLOR_DARK_GREY = 8,
-	VGA_COLOR_LIGHT_BLUE = 9,
-	VGA_COLOR_LIGHT_GREEN = 10,
-	VGA_COLOR_LIGHT_CYAN = 11,
-	VGA_COLOR_LIGHT_RED = 12,
-	VGA_COLOR_LIGHT_MAGENTA = 13,
-	VGA_COLOR_LIGHT_BROWN = 14,
-	VGA_COLOR_WHITE = 15,
-};
+//
+typedef struct {
+	uint64 base;
+	uint64 size;
+} BootModuleInfo;
 
 
-// реальный режим необходим в основном для инициализации системы
+// kernel
+int kmain(uint8 boot_disk_id, void *memory_map, BootModuleInfo *boot_module_list) {
 
-
-//int kmain(uint8 boot_disk_id, void *memory_map, BootModuleInfo *boot_module_list) {
-int kmain(void) {
-    interrupts_init();
+    interrupts_init(); // инит векторов
 
     framebuffer_init();
-    timer_init();
-    keyboard_init();
 
-    interrupts_run(); // activate
+    timer_init(); // внедряем таймер
+    keyboard_init(); // внедряем клаву
 
-    shell();
+    interrupts_run(); // запускаемся
 
-    while(1) asm("hlt");
+    // system info
 
-    return 0xdeadbaba;
+    printf("Boot disk id is %d\n", boot_disk_id);
+    printf("Memory map at 0x%x\n", memory_map);
+    printf("Boot module list at 0x%x\n", boot_module_list);
+    printf("String is %s, char is %c, number is %d, hex number is 0x%x", __DATE__, 'A', 1234, 0x1234);
+
+    // system started
+
+    shell(); // тут вопрос
+
+    while(1) asm("hlt"); // петля
+
+    return 0xdeadbaba; // код возврата требуемый
 }
