@@ -1,4 +1,4 @@
-BasicOS (x86)
+BasicOS (x86/ZX)
 ===
 
 Requirements:
