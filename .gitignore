@@ -3,3 +3,4 @@
 *.qcow2
 .project
 .settings
+bios/PC/.build/*
